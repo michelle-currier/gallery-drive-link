@@ -33,14 +33,14 @@ body {
 
 
 
-/* Apply custom font styles */
+/* Apply Parkinsans to specific elements */
 h1,
 h2,
 h3,
 h4,
 button,
 label {
-  font-weight: 600;
+  @apply font-parkinsans font-semibold;
 }
 
 h1 {
