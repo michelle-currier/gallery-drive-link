@@ -56,7 +56,7 @@ export function NavbarSimple() {
           href="/"
           className="mr-4 cursor-pointer py-1.5 font-bold text-2xl text-gray-900"
         >
-          Your name here
+          Michelle Currier's Flyer Gallery
         </a>
         {/* Desktop Navigation */}
         <div className="hidden lg:block">
