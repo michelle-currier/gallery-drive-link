@@ -7,8 +7,8 @@ const Index = () => {
       <NavbarSimple />
       <div className="container flex flex-col p-8 pb-20 gap-16 sm:p-20 mx-auto">
         <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-          <h1 className="text-4xl font-parkinsans">Drive Latest Collection</h1>
-          <h3>Material Gallery</h3>
+          <h1 className="text-4xl font-parkinsans">Flyer Collection</h1>
+         
           <GalleryAPI />
           <div className="flex gap-4 items-center flex-col sm:flex-row">
             <a
