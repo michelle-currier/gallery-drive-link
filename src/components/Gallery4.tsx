@@ -69,23 +69,18 @@ const GalleryAPI: React.FC = () => {
       {/* Dialog modal for larger image view */}
       {selectedImage && (
         <Dialog open={openModal} onOpenChange={setOpenModal}>
-          <DialogContent className="max-w-4xl max-h-[90vh] overflow-auto">
-            <div className="flex justify-end mb-4">
-              <button
-                className="px-4 py-2 bg-purple-500 text-white rounded-md hover:bg-purple-600 transition-colors"
-                onClick={() => setOpenModal(false)}
-              >
-                Close
-              </button>
-            </div>
+          <DialogContent className="max-w-4xl max-h-[90vh] overflow-auto animate-fade-in border-0 bg-black/90 backdrop-blur-sm">
             <div className="flex justify-center items-center">
               <img
                 src={selectedImage.url}
                 alt={selectedImage.name}
                 className="max-w-full max-h-full rounded-lg"
+                onError={(e) => {
+                  e.currentTarget.src = `https://drive.google.com/uc?id=${selectedImage.id}`;
+                }}
               />
             </div>
-            <p className="text-center mt-4">{selectedImage.name}</p>
+            <p className="text-center mt-4 text-white">{selectedImage.name}</p>
           </DialogContent>
         </Dialog>
       )}
