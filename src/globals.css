@@ -9,6 +9,10 @@
     --custom-foreground: 0 0% 9%;
   }
   
+  .custom-gradient-bg {
+    background: var(--custom-background);
+  }
+  
   nav {
     border: 0px solid transparent;
   }

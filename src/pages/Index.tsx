@@ -3,7 +3,7 @@ import GalleryAPI from "@/components/Gallery4";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen custom-gradient-bg">
       <NavbarSimple />
       <div className="container flex flex-col p-8 pb-20 gap-16 sm:p-20 mx-auto">
         <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
