@@ -53,7 +53,7 @@ const GalleryAPI: React.FC = () => {
               <img
                 src={image.url}
                 alt={image.name}
-                className="h-60 w-full max-w-full rounded-lg object-cover object-center cursor-pointer"
+                className="h-80 w-full max-w-full rounded-lg object-cover object-center cursor-pointer"
                 onError={(e) => {
                   console.error('Failed to load image:', image.name, image.url);
                   // Fallback to a different URL format if the first one fails
