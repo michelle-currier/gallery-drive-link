@@ -75,21 +75,21 @@ const GalleryAPI: React.FC = () => {
             <DialogOverlay />
             <DialogPrimitive.Content
               className={cn(
-                "fixed left-[50%] top-[50%] z-50 grid w-full max-w-4xl translate-x-[-50%] translate-y-[-50%] gap-4 border-0 bg-black/90 backdrop-blur-sm p-6 shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] sm:rounded-lg cursor-pointer h-screen overflow-auto"
+                "fixed left-[50%] top-[50%] z-50 flex flex-col w-full max-w-4xl translate-x-[-50%] translate-y-[-50%] border-0 bg-black/90 backdrop-blur-sm p-6 shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] sm:rounded-lg cursor-pointer h-[100vh] max-h-[100vh]"
               )}
               onClick={() => setOpenModal(false)}
             >
-              <div className="flex justify-center items-center">
+              <div className="flex justify-center items-center flex-1 min-h-0">
                 <img
                   src={selectedImage.url}
                   alt={selectedImage.name}
-                  className="max-w-full max-h-full rounded-lg"
+                  className="max-w-full max-h-full object-contain rounded-lg"
                   onError={(e) => {
                     e.currentTarget.src = `https://drive.google.com/uc?id=${selectedImage.id}`;
                   }}
                 />
               </div>
-              <p className="text-center mt-4 text-white">{selectedImage.name}</p>
+              <p className="text-center mt-4 text-white flex-shrink-0">{selectedImage.name}</p>
             </DialogPrimitive.Content>
           </DialogPortal>
         </Dialog>
