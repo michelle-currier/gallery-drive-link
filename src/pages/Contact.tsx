@@ -22,11 +22,18 @@ export default function Contact() {
     setIsLoading(true);
 
     try {
+      console.log('Attempting to send contact form...', formData);
+      
       const { data, error } = await supabase.functions.invoke('send-contact-email', {
         body: formData
       });
 
-      if (error) throw error;
+      console.log('Supabase response:', { data, error });
+
+      if (error) {
+        console.error('Supabase error details:', error);
+        throw error;
+      }
 
       toast({
         title: "Message sent!",
@@ -36,9 +43,21 @@ export default function Contact() {
       setFormData({ name: "", email: "", message: "" });
     } catch (error) {
       console.error('Error sending message:', error);
+      
+      // More detailed error handling
+      let errorMessage = "Failed to send message. Please try again or email directly to mcurrierdesigns@gmail.com";
+      
+      if (error instanceof Error) {
+        if (error.message.includes('fetch')) {
+          errorMessage = "Unable to connect to email service. Please check if the Supabase edge function is deployed.";
+        } else if (error.message.includes('401')) {
+          errorMessage = "Authentication error. Please check Supabase configuration.";
+        }
+      }
+      
       toast({
         title: "Error",
-        description: "Failed to send message. Please try again or email directly to mushel@gmail.com",
+        description: errorMessage,
         variant: "destructive",
       });
     } finally {
