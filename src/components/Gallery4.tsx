@@ -1,6 +1,5 @@
-"use client";
 import React, { useState, useEffect } from "react";
-import { Dialog, DialogBody } from "@material-tailwind/react";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 
 type ImageType = {
   id: string;
@@ -77,23 +76,12 @@ const GalleryAPI: React.FC = () => {
 
       {/* Dialog modal for larger image view */}
       {selectedImage && (
-        <Dialog
-          open={openModal}
-          handler={toggleModal}
-          placeholder={undefined}
-          onPointerEnterCapture={undefined}
-          onPointerLeaveCapture={undefined}
-        >
-          <DialogBody
-            className="flex flex-col"
-            placeholder={undefined}
-            onPointerEnterCapture={undefined}
-            onPointerLeaveCapture={undefined}
-          >
-            <div className="flex justify-end">
+        <Dialog open={openModal} onOpenChange={setOpenModal}>
+          <DialogContent className="max-w-4xl max-h-[90vh] overflow-auto">
+            <div className="flex justify-end mb-4">
               <button
-                className="mt-8 px-4 py-2 bg-purple-500 text-white rounded-md"
-                onClick={toggleModal} // Close modal when clicked
+                className="px-4 py-2 bg-purple-500 text-white rounded-md hover:bg-purple-600 transition-colors"
+                onClick={() => setOpenModal(false)}
               >
                 Close
               </button>
@@ -106,7 +94,7 @@ const GalleryAPI: React.FC = () => {
               />
             </div>
             <p className="text-center mt-4">{selectedImage.name}</p>
-          </DialogBody>
+          </DialogContent>
         </Dialog>
       )}
     </div>

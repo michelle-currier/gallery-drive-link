@@ -1,11 +1,4 @@
-"use client";
 import React from "react";
-import {
-  Navbar,
-  Collapse,
-  Typography,
-  IconButton,
-} from "@material-tailwind/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 
 function NavList({ isVisible }: { isVisible: boolean }) {
@@ -14,52 +7,30 @@ function NavList({ isVisible }: { isVisible: boolean }) {
       className={`my-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6 transition-opacity delay-150
     ${isVisible ? "opacity-100" : "opacity-0"}`}
     >
-      <Typography
-        as="li"
-        variant="small"
-        className="p-1 font-medium"
-        placeholder={undefined}
-        onPointerEnterCapture={undefined}
-        onPointerLeaveCapture={undefined}
-      >
+      <li className="p-1 font-medium">
         <a
           href="/about"
           className="flex items-center text-teal-600 hover:text-blue-500 transition-colors"
         >
           about
         </a>
-      </Typography>
-      <Typography
-        as="li"
-        variant="small"
-        className="p-1 font-medium"
-        placeholder={undefined}
-        onPointerEnterCapture={undefined}
-        onPointerLeaveCapture={undefined}
-      >
+      </li>
+      <li className="p-1 font-medium">
         <a
           href="/gallery"
           className="flex items-center text-teal-600 hover:text-blue-500 transition-colors"
         >
           gallery
         </a>
-      </Typography>
-      <Typography
-        as="li"
-        variant="small"
-        color="teal"
-        className="p-1 font-medium"
-        placeholder={undefined}
-        onPointerEnterCapture={undefined}
-        onPointerLeaveCapture={undefined}
-      >
+      </li>
+      <li className="p-1 font-medium">
         <a
           href="/contact"
           className="flex items-center text-teal-600 hover:text-blue-500 transition-colors"
         >
           contact
         </a>
-      </Typography>
+      </li>
     </ul>
   );
 }
@@ -79,49 +50,34 @@ export function NavbarSimple() {
     };
   }, []);
   return (
-    <Navbar
-      className="mx-auto max-w-screen-xl px-6 py-3"
-      placeholder={undefined}
-      onPointerEnterCapture={undefined}
-      onPointerLeaveCapture={undefined}
-    >
+    <nav className="mx-auto max-w-screen-xl px-6 py-3 bg-white shadow-sm border-b">
       <div className="flex items-center justify-between logo">
-        <Typography
-          as="a"
+        <a
           href="/"
-          variant="h4"
-          className="mr-4 cursor-pointer py-1.5 font-bold"
-          placeholder={undefined}
-          onPointerEnterCapture={undefined}
-          onPointerLeaveCapture={undefined}
+          className="mr-4 cursor-pointer py-1.5 font-bold text-2xl text-gray-900"
         >
           Your name here
-        </Typography>
+        </a>
         {/* Desktop Navigation */}
         <div className="hidden lg:block">
-          <NavList isVisible />
+          <NavList isVisible={true} />
         </div>
         {/* Mobile Menu Toggle */}
-        <IconButton
-          variant="text"
-          className="ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
-          ripple={false}
+        <button
+          className="ml-auto h-6 w-6 text-gray-900 hover:bg-gray-100 focus:bg-gray-100 active:bg-gray-100 lg:hidden p-1 rounded"
           onClick={() => setOpenNav((prev) => !prev)}
-          placeholder={undefined}
-          onPointerEnterCapture={undefined}
-          onPointerLeaveCapture={undefined}
         >
           {openNav ? (
             <XMarkIcon className="h-6 w-6" strokeWidth={2} />
           ) : (
             <Bars3Icon className="h-6 w-6" strokeWidth={2} />
           )}
-        </IconButton>
+        </button>
       </div>
       {/* Mobile Navigation */}
-      <Collapse open={openNav} className="transition-transform lg:hidden ">
+      <div className={`transition-all duration-300 lg:hidden ${openNav ? 'max-h-48 opacity-100' : 'max-h-0 opacity-0 overflow-hidden'}`}>
         <NavList isVisible={openNav} />
-      </Collapse>
-    </Navbar>
+      </div>
+    </nav>
   );
 }

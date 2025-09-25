@@ -28,19 +28,19 @@ nav > div.logo > a {
 body {
   color: var(--foreground);
   background: var(--background);
-  @apply font-geistMono;
+  font-family: system-ui, -apple-system, sans-serif;
 }
 
 
 
-/* Apply parkinsans to specific elements */
+/* Apply custom font styles */
 h1,
 h2,
 h3,
 h4,
 button,
 label {
-  @apply font-parkinsans;
+  font-weight: 600;
 }
 
 h1 {
