@@ -1,4 +1,5 @@
 import React from "react";
+import logo from "@/assets/logo.png";
 
 export function NavbarSimple() {
   return (
@@ -6,9 +7,10 @@ export function NavbarSimple() {
       <div className="flex items-center justify-between">
         <a
           href="/"
-          className="mr-4 cursor-pointer py-1.5 font-bold text-2xl text-gray-900"
+          className="mr-4 cursor-pointer py-1.5 flex items-center gap-3"
         >
-          Michelle Currier's Flyer Gallery
+          <img src={logo} alt="Michelle Currier Logo" className="h-10 w-10" />
+          <span className="font-bold text-2xl text-gray-900">Michelle Currier's Flyer Gallery</span>
         </a>
         <div>
           <a
