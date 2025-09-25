@@ -39,7 +39,7 @@
     }
     
     h1, h2, h3, h4, h5, h6 {
-      color: white !important;
+      /* Keep original heading colors in dark mode */
     }
     
     p, span, div, li, a {
@@ -72,6 +72,6 @@ label {
     color: hsl(277 50% 58%);
   }
   h3 {
-    color: hsl(41 60% 65%);
+    color: hsl(41 60% 45%); /* Made darker - reduced lightness from 65% to 45% */
   }
 }
