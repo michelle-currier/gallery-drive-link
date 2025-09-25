@@ -22,9 +22,18 @@ serve(async (req) => {
     }
 
     const SENDGRID_API_KEY = Deno.env.get('SENDGRID_API_KEY')
+    const SENDGRID_FROM_EMAIL = Deno.env.get('SENDGRID_FROM_EMAIL')
+    
     if (!SENDGRID_API_KEY) {
       return new Response(
         JSON.stringify({ error: 'SendGrid API key not configured' }),
+        { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      )
+    }
+    
+    if (!SENDGRID_FROM_EMAIL) {
+      return new Response(
+        JSON.stringify({ error: 'SendGrid from email not configured' }),
         { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       )
     }
@@ -37,7 +46,7 @@ serve(async (req) => {
           subject: `New Contact Form Message from ${name}`
         }
       ],
-      from: { email: "noreply@yourdomain.com" }, // Replace with verified sender
+      from: { email: SENDGRID_FROM_EMAIL },
       content: [
         {
           type: "text/html",
@@ -65,7 +74,7 @@ serve(async (req) => {
       const error = await response.text()
       console.error('SendGrid error:', error)
       return new Response(
-        JSON.stringify({ error: 'Failed to send email' }),
+        JSON.stringify({ error: 'SendGrid error', details: error, status: response.status }),
         { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       )
     }
