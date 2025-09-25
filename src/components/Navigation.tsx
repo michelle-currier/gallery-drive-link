@@ -7,22 +7,7 @@ function NavList({ isVisible }: { isVisible: boolean }) {
       className={`my-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6 transition-opacity delay-150
     ${isVisible ? "opacity-100" : "opacity-0"}`}
     >
-      <li className="p-1 font-medium">
-        <a
-          href="/"
-          className="flex items-center text-teal-600 hover:text-blue-500 transition-colors"
-        >
-          home
-        </a>
-      </li>
-      <li className="p-1 font-medium">
-        <a
-          href="/contact"
-          className="flex items-center text-teal-600 hover:text-blue-500 transition-colors"
-        >
-          contact
-        </a>
-      </li>
+      {/* Navigation items removed as requested */}
     </ul>
   );
 }
