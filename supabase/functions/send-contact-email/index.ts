@@ -33,7 +33,7 @@ serve(async (req) => {
     const emailData = {
       personalizations: [
         {
-          to: [{ email: "michelle@example.com" }], // Replace with actual email
+          to: [{ email: "mushel@gmail.com" }],
           subject: `New Contact Form Message from ${name}`
         }
       ],

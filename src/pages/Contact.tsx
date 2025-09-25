@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -19,24 +20,23 @@ export default function Contact() {
     setIsLoading(true);
 
     try {
-      // Simple mailto functionality for now
-      const subject = `Contact from ${formData.name}`;
-      const body = `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`;
-      const mailtoUrl = `mailto:michelle@example.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-      
-      window.open(mailtoUrl, '_blank');
+      const { data, error } = await supabase.functions.invoke('send-contact-email', {
+        body: formData
+      });
+
+      if (error) throw error;
 
       toast({
-        title: "Email client opened!",
-        description: "Your default email client should open with the message. Please send from there.",
+        title: "Message sent!",
+        description: "Thank you for your message. I'll get back to you soon.",
       });
 
       setFormData({ name: "", email: "", message: "" });
     } catch (error) {
-      console.error('Error:', error);
+      console.error('Error sending message:', error);
       toast({
         title: "Error",
-        description: "Failed to open email client. Please email directly to michelle@example.com",
+        description: "Failed to send message. Please try again.",
         variant: "destructive",
       });
     } finally {
