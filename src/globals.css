@@ -1,0 +1,54 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #CACEB3;  
+  --background: linear-gradient(245deg, rgb(170, 177, 200) 0%, rgb(166, 203, 153) 100%);
+  --foreground: #171717;
+}
+nav {
+  border: 0px solid transparent;
+}
+nav > div.logo > a {
+  color:  oklch(0.453 0.124 130.933);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: oklch(0.704 0.04 256.788);
+    --logo-color: oklch(0.648 0.2 131.684);
+  }
+  nav > div.logo > a {
+    color: var(--logo-color);
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  @apply font-geistMono;
+}
+
+
+
+/* Apply parkinsans to specific elements */
+h1,
+h2,
+h3,
+h4,
+button,
+label {
+  @apply font-parkinsans;
+}
+
+h1 {
+  color: oklch(0.591 0.293 322.896);
+}
+h2 {
+  color: oklch(0.585 0.233 277.117);
+}
+h3 {
+  color: oklch(0.646 0.222 41.116);
+}
