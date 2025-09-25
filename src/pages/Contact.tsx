@@ -5,6 +5,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+import { useNavigate } from "react-router-dom";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -14,6 +15,7 @@ export default function Contact() {
   });
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -133,6 +135,14 @@ export default function Contact() {
                 </div>
               </div>
             </div>
+            
+            <Button 
+              onClick={() => navigate('/')}
+              variant="outline"
+              className="w-full mt-8"
+            >
+              Back to Gallery
+            </Button>
           </div>
         </main>
       </div>
