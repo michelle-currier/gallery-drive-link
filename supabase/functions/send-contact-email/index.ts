@@ -33,7 +33,7 @@ serve(async (req) => {
     const emailData = {
       personalizations: [
         {
-          to: [{ email: "mushel@gmail.com" }],
+          to: [{ email: "mcurrierdesigns@gmail.com" }],
           subject: `New Contact Form Message from ${name}`
         }
       ],
