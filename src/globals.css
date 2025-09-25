@@ -22,15 +22,28 @@
   }
 
   
+  
   @media (prefers-color-scheme: dark) {
     :root {
       --custom-background: hsl(0 0% 4%);
-      --custom-foreground: hsl(256 15% 70%);
+      --custom-foreground: 0 0% 98%;
       --custom-logo-color: hsl(131 40% 65%);
     }
     
     nav > div.logo > a {
       color: var(--custom-logo-color);
+    }
+    
+    body {
+      color: hsl(var(--custom-foreground)) !important;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+      color: white !important;
+    }
+    
+    p, span, div, li, a {
+      color: white !important;
     }
   }
 
