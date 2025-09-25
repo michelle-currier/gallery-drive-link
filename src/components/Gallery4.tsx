@@ -1,11 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
-
-type ImageType = {
-  id: string;
-  name: string;
-  url: string;
-};
+import { fetchGoogleDriveImages, type ImageType } from "@/services/googleDrive";
 
 const GalleryAPI: React.FC = () => {
   const [images, setImages] = useState<ImageType[]>([]);
@@ -15,19 +10,11 @@ const GalleryAPI: React.FC = () => {
   const [openModal, setOpenModal] = useState<boolean>(false); // To control modal visibility
 
   useEffect(() => {
-    const fetchImages = async () => {
+    const loadImages = async () => {
       try {
-        const response = await fetch("/api/drive");
-        if (!response.ok) throw new Error("Failed to load images");
-
-        const data = await response.json();
-        const imagesWithUrls = data.images.map((image: any) => ({
-          ...image,
-          url: `https://www.googleapis.com/drive/v3/files/${image.id}?alt=media&key=${process.env.NEXT_PUBLIC_GOOGLE_API_KEY}`,
-        }));
-        console.log("Fetched Images:", data.images); // Log the response to check
-        //setImages(data.images);
-        setImages(imagesWithUrls);
+        const images = await fetchGoogleDriveImages();
+        setImages(images);
+        console.log("Fetched Images:", images);
       } catch (err: any) {
         setError(err.message);
       } finally {
@@ -35,7 +22,7 @@ const GalleryAPI: React.FC = () => {
       }
     };
 
-    fetchImages();
+    loadImages();
   }, []);
 
   const handleImageClick = (image: ImageType) => {
