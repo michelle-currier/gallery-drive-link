@@ -69,7 +69,10 @@ const GalleryAPI: React.FC = () => {
       {/* Dialog modal for larger image view */}
       {selectedImage && (
         <Dialog open={openModal} onOpenChange={setOpenModal}>
-          <DialogContent className="max-w-4xl max-h-[90vh] overflow-auto animate-fade-in border-0 bg-black/90 backdrop-blur-sm">
+          <DialogContent 
+            className="max-w-4xl max-h-[90vh] overflow-auto animate-fade-in border-0 bg-black/90 backdrop-blur-sm cursor-pointer"
+            onClick={() => setOpenModal(false)}
+          >
             <div className="flex justify-center items-center">
               <img
                 src={selectedImage.url}
