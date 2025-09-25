@@ -9,18 +9,10 @@ function NavList({ isVisible }: { isVisible: boolean }) {
     >
       <li className="p-1 font-medium">
         <a
-          href="/about"
+          href="/"
           className="flex items-center text-teal-600 hover:text-blue-500 transition-colors"
         >
-          about
-        </a>
-      </li>
-      <li className="p-1 font-medium">
-        <a
-          href="/gallery"
-          className="flex items-center text-teal-600 hover:text-blue-500 transition-colors"
-        >
-          gallery
+          home
         </a>
       </li>
       <li className="p-1 font-medium">
