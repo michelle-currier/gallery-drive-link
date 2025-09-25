@@ -2,34 +2,39 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #CACEB3;  
-  --background: linear-gradient(245deg, rgb(170, 177, 200) 0%, rgb(166, 203, 153) 100%);
-  --foreground: #171717;
-}
-nav {
-  border: 0px solid transparent;
-}
-nav > div.logo > a {
-  color:  oklch(0.453 0.124 130.933);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer components {
   :root {
-    --background: #0a0a0a;
-    --foreground: oklch(0.704 0.04 256.788);
-    --logo-color: oklch(0.648 0.2 131.684);
+    /* Custom background gradient */
+    --custom-background: linear-gradient(245deg, rgb(170, 177, 200) 0%, rgb(166, 203, 153) 100%);
+    --custom-foreground: 0 0% 9%;
   }
+  
+  nav {
+    border: 0px solid transparent;
+  }
+  
   nav > div.logo > a {
-    color: var(--logo-color);
+    color: hsl(131 50% 35%);
   }
-}
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: system-ui, -apple-system, sans-serif;
-}
+  
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --custom-background: hsl(0 0% 4%);
+      --custom-foreground: hsl(256 15% 70%);
+      --custom-logo-color: hsl(131 40% 65%);
+    }
+    
+    nav > div.logo > a {
+      color: var(--custom-logo-color);
+    }
+  }
+
+  body {
+    background: var(--custom-background);
+    color: hsl(var(--custom-foreground));
+    font-family: system-ui, -apple-system, sans-serif;
+  }
 
 
 
@@ -43,12 +48,13 @@ label {
   @apply font-parkinsans font-semibold;
 }
 
-h1 {
-  color: oklch(0.591 0.293 322.896);
-}
-h2 {
-  color: oklch(0.585 0.233 277.117);
-}
-h3 {
-  color: oklch(0.646 0.222 41.116);
+  h1 {
+    color: hsl(322 70% 59%);
+  }
+  h2 {
+    color: hsl(277 50% 58%);
+  }
+  h3 {
+    color: hsl(41 60% 65%);
+  }
 }
