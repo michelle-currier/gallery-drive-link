@@ -54,6 +54,11 @@ const GalleryAPI: React.FC = () => {
                 src={image.url}
                 alt={image.name}
                 className="h-60 w-full max-w-full rounded-lg object-cover object-center cursor-pointer"
+                onError={(e) => {
+                  console.error('Failed to load image:', image.name, image.url);
+                  // Fallback to a different URL format if the first one fails
+                  e.currentTarget.src = `https://drive.google.com/uc?id=${image.id}`;
+                }}
               />
               <p className="text-sm text-center mt-2">{image.name}</p>
             </div>

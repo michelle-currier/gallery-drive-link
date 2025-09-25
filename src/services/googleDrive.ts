@@ -10,8 +10,8 @@ export type ImageType = {
 
 export const fetchGoogleDriveImages = async (): Promise<ImageType[]> => {
   try {
-    // Fetch files from Google Drive API
-    const url = `https://www.googleapis.com/drive/v3/files?q='${FOLDER_ID}' in parents and mimeType contains 'image'&key=${API_KEY}&fields=files(id,name)`;
+    // Fetch files from Google Drive API with thumbnailLink
+    const url = `https://www.googleapis.com/drive/v3/files?q='${FOLDER_ID}' in parents and mimeType contains 'image'&key=${API_KEY}&fields=files(id,name,thumbnailLink,webViewLink)`;
     
     const response = await fetch(url);
     
@@ -21,11 +21,12 @@ export const fetchGoogleDriveImages = async (): Promise<ImageType[]> => {
 
     const data = await response.json();
     
-    // Map to get the direct media URLs for each image
+    // Map to get public URLs for each image
     const images: ImageType[] = data.files.map((file: any) => ({
       id: file.id,
       name: file.name,
-      url: `https://www.googleapis.com/drive/v3/files/${file.id}?alt=media&key=${API_KEY}`, // Direct media URL
+      // Use Google Drive's public sharing URL format which works without authentication
+      url: `https://drive.google.com/thumbnail?id=${file.id}&sz=w1000`,
     }));
 
     return images;
