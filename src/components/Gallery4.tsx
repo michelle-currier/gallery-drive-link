@@ -41,7 +41,6 @@ const GalleryAPI: React.FC = () => {
 
   return (
     <div className="pt-2">
-      <h2 className="text-2xl font-bold mb-4">Image Gallery</h2>
       {images.length === 0 ? (
         <p>No images found.</p>
       ) : (
@@ -55,9 +54,9 @@ const GalleryAPI: React.FC = () => {
               <img
                 src={image.url}
                 alt={image.name}
-                className="h-80 w-full max-w-full rounded-lg object-cover object-center cursor-pointer"
+                className="h-80 w-full max-w-full rounded-lg object-contain object-center cursor-pointer"
                 onError={(e) => {
-                  console.error('Failed to load image:', image.name, image.url);
+                  console.error("Failed to load image:", image.name, image.url);
                   // Fallback to a different URL format if the first one fails
                   e.currentTarget.src = `https://drive.google.com/uc?id=${image.id}`;
                 }}
@@ -89,7 +88,9 @@ const GalleryAPI: React.FC = () => {
                   }}
                 />
               </div>
-              <p className="text-center mt-4 text-white flex-shrink-0">{selectedImage.name}</p>
+              <p className="text-center mt-4 text-white flex-shrink-0">
+                {selectedImage.name}
+              </p>
             </DialogPrimitive.Content>
           </DialogPortal>
         </Dialog>
