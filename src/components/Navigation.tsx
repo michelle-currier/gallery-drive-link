@@ -10,14 +10,16 @@ export function NavbarSimple() {
           className="mr-4 cursor-pointer py-1.5 flex items-center gap-3"
         >
           <img src={logo} alt="Michelle Currier Logo" className="h-10 w-10" />
-          <span className="font-bold text-2xl text-gray-900">Michelle Currier's Flyer Gallery</span>
+          <span className="font-bold text-2xl text-gray-900">
+            Michelle Currier's Flyer Gallery
+          </span>
         </a>
         <div>
           <a
             href="/contact"
             className="flex items-center text-teal-600 hover:text-blue-500 transition-colors font-medium"
           >
-            contact
+            Contact me
           </a>
         </div>
       </div>

@@ -183,13 +183,6 @@ export default function Contact() {
                 </div>
               </div>
             </div>
-            <Button
-              onClick={() => navigate("/")}
-              variant="outline"
-              className="mt-8"
-            >
-              Back to Gallery
-            </Button>
           </div>
         </main>
       </div>
