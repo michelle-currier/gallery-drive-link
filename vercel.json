@@ -6,7 +6,7 @@
     }
   ],
   "env": {
-    "NEXT_PUBLIC_GOOGLE_API_KEY": "@google_api_key",
-    "NEXT_PUBLIC_GOOGLE_FOLDER_ID": "@google_folder_id"
+    "VITE_GOOGLE_API_KEY": "@google_api_key",
+    "VITE_GOOGLE_FOLDER_ID": "@google_folder_id"
   }
 }
