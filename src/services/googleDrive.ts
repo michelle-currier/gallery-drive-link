@@ -1,6 +1,6 @@
 // Google Drive API configuration
-const API_KEY = "AIzaSyA_vGN_TXjigtZUxKDsYYRBU8yJnVhqfOg";
-const FOLDER_ID = "1vP3xg_n60hFK4tM4QHjXEX8GHhca7OZJ";
+const API_KEY = process.env.NEXT_PUBLIC_GOOGLE_API_KEY!;
+const FOLDER_ID = process.env.NEXT_PUBLIC_GOOGLE_FOLDER_ID!;
 
 export type ImageType = {
   id: string;
