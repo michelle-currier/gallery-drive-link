@@ -1,0 +1,12 @@
+{
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ],
+  "env": {
+    "VITE_GOOGLE_API_KEY": "@google_api_key",
+    "VITE_GOOGLE_FOLDER_ID": "@google_folder_id"
+  }
+}
