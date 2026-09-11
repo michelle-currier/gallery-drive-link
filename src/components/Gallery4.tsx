@@ -66,7 +66,7 @@ const GalleryAPI: React.FC<GalleryAPIProps> = ({ collection = "flyers" }) => {
                   e.currentTarget.src = `https://drive.google.com/uc?id=${image.id}`;
                 }}
               />
-              <p className="text-sm text-center mt-2">{image.name}</p>
+              <p className="text-sm text-center mt-2 bg-white">{image.name}</p>
             </div>
           ))}
         </div>
