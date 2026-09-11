@@ -1,9 +1,7 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts"
+import { corsHeaders } from 'npm:@supabase/supabase-js@2/cors'
 
-const corsHeaders = {
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
-}
+const LOGO_FOLDER_ID = '1jEGi0X02cuKgqdikr5slB-u4zzWRt8fJ'
 
 serve(async (req) => {
   // Handle CORS preflight requests
@@ -13,12 +11,30 @@ serve(async (req) => {
 
   try {
     const apiKey = Deno.env.get('GOOGLE_API_KEY')
-    const folderId = Deno.env.get('GOOGLE_FOLDER_ID')
+    const flyerFolderId = Deno.env.get('GOOGLE_FOLDER_ID')
+
+    let requestBody: { collection?: unknown } = {}
+    try {
+      requestBody = await req.json()
+    } catch {
+      // Requests without a body load the original flyer collection.
+    }
+
+    const collection = requestBody.collection ?? 'flyers'
+    if (collection !== 'flyers' && collection !== 'logos') {
+      return new Response(
+        JSON.stringify({ error: 'Invalid collection' }),
+        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } },
+      )
+    }
+
+    const folderId = collection === 'logos' ? LOGO_FOLDER_ID : flyerFolderId
 
     if (!apiKey || !folderId) {
       console.error('Missing environment variables:', { 
         hasApiKey: !!apiKey, 
-        hasFolderId: !!folderId 
+        hasFolderId: !!folderId,
+        collection,
       })
       throw new Error('Missing Google API configuration')
     }
