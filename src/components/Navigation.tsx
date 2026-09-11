@@ -9,7 +9,13 @@ export function NavbarSimple() {
           <img src={logo} alt="Michelle Currier Logo" className="h-10 w-10" />
           <span className="font-bold text-2xl text-gray-900 font-parkinsans">Michelle Currier's Flyer Gallery</span>
         </a>
-        <div>
+        <div className="flex items-center gap-5">
+          <a
+            href="/logos"
+            className="flex items-center font-parkinsans text-teal-600 hover:text-blue-500 transition-colors font-medium"
+          >
+            Logo Collection
+          </a>
           <a
             href="/contact"
             className="flex items-center font-parkinsans text-teal-600 hover:text-blue-500 transition-colors font-medium"
