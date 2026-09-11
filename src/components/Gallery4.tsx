@@ -57,7 +57,12 @@ const GalleryAPI: React.FC<GalleryAPIProps> = ({ collection = "flyers" }) => {
                 className="h-80 w-full max-w-full rounded-lg object-contain object-center cursor-pointer"
                 onError={(e) => {
                   console.error("Failed to load image:", image.name, image.url);
-                  // Fallback to a different URL format if the first one fails
+                  if (e.currentTarget.dataset.fallbackAttempted === "true") {
+                    e.currentTarget.style.display = "none";
+                    return;
+                  }
+
+                  e.currentTarget.dataset.fallbackAttempted = "true";
                   e.currentTarget.src = `https://drive.google.com/uc?id=${image.id}`;
                 }}
               />
@@ -84,6 +89,12 @@ const GalleryAPI: React.FC<GalleryAPIProps> = ({ collection = "flyers" }) => {
                   alt={selectedImage.name}
                   className="max-w-full max-h-full object-contain rounded-lg"
                   onError={(e) => {
+                    if (e.currentTarget.dataset.fallbackAttempted === "true") {
+                      e.currentTarget.style.display = "none";
+                      return;
+                    }
+
+                    e.currentTarget.dataset.fallbackAttempted = "true";
                     e.currentTarget.src = `https://drive.google.com/uc?id=${selectedImage.id}`;
                   }}
                 />
