@@ -1,10 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Dialog, DialogPortal, DialogOverlay } from "@/components/ui/dialog";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { fetchGoogleDriveImages, type ImageType } from "@/services/googleDrive";
 import { cn } from "@/lib/utils";
 
-const GalleryAPI: React.FC = () => {
+type GalleryAPIProps = {
+  collection?: "flyers" | "logos";
+};
+
+const GalleryAPI: React.FC<GalleryAPIProps> = ({ collection = "flyers" }) => {
   const [images, setImages] = useState<ImageType[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -14,26 +18,22 @@ const GalleryAPI: React.FC = () => {
   useEffect(() => {
     const loadImages = async () => {
       try {
-        const images = await fetchGoogleDriveImages();
+        const images = await fetchGoogleDriveImages(collection);
         setImages(images);
         console.log("Fetched Images:", images);
-      } catch (err: any) {
-        setError(err.message);
+      } catch (err: unknown) {
+        setError(err instanceof Error ? err.message : "Unable to load images");
       } finally {
         setLoading(false);
       }
     };
 
     loadImages();
-  }, []);
+  }, [collection]);
 
   const handleImageClick = (image: ImageType) => {
     setSelectedImage(image);
     setOpenModal(true); // Open the modal when an image is clicked
-  };
-
-  const toggleModal = () => {
-    setOpenModal(!openModal); // Toggle the modal open/close state
   };
 
   if (loading) return <p>Loading images...</p>;
@@ -57,7 +57,12 @@ const GalleryAPI: React.FC = () => {
                 className="h-80 w-full max-w-full rounded-lg object-contain object-center cursor-pointer"
                 onError={(e) => {
                   console.error("Failed to load image:", image.name, image.url);
-                  // Fallback to a different URL format if the first one fails
+                  if (e.currentTarget.dataset.fallbackAttempted === "true") {
+                    e.currentTarget.style.display = "none";
+                    return;
+                  }
+
+                  e.currentTarget.dataset.fallbackAttempted = "true";
                   e.currentTarget.src = `https://drive.google.com/uc?id=${image.id}`;
                 }}
               />
@@ -84,6 +89,12 @@ const GalleryAPI: React.FC = () => {
                   alt={selectedImage.name}
                   className="max-w-full max-h-full object-contain rounded-lg"
                   onError={(e) => {
+                    if (e.currentTarget.dataset.fallbackAttempted === "true") {
+                      e.currentTarget.style.display = "none";
+                      return;
+                    }
+
+                    e.currentTarget.dataset.fallbackAttempted = "true";
                     e.currentTarget.src = `https://drive.google.com/uc?id=${selectedImage.id}`;
                   }}
                 />

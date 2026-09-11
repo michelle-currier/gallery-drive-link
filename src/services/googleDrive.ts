@@ -8,10 +8,14 @@ export type ImageType = {
   url: string;
 };
 
-export const fetchGoogleDriveImages = async (): Promise<ImageType[]> => {
+export const fetchGoogleDriveImages = async (
+  collection: "flyers" | "logos" = "flyers"
+): Promise<ImageType[]> => {
   try {
     // Use the secure edge function to fetch images
-    const { data, error } = await supabase.functions.invoke('google-drive-images');
+    const { data, error } = await supabase.functions.invoke('google-drive-images', {
+      body: { collection },
+    });
     
     if (error) {
       throw new Error(`Failed to fetch images: ${error.message}`);
