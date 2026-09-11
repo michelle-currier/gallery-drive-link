@@ -7,7 +7,7 @@ export function NavbarSimple() {
       <div className="flex items-center justify-between">
         <a href="/" className="mr-4 cursor-pointer py-1.5 flex items-center gap-3">
           <img src={logo} alt="Michelle Currier Logo" className="h-10 w-10" />
-          <span className="font-bold text-2xl text-gray-900 font-parkinsans">Michelle Currier's Flyer Gallery</span>
+          <span className="font-bold text-2xl text-gray-900 font-parkinsans">Michelle Currier's Graphics Gallery</span>
         </a>
         <div className="flex items-center gap-5">
           <a
